@@ -64,6 +64,8 @@ or
 Entity(alias, name="", description="") //psuedonym for Table
 
 Type(alias, name="", description="")   //data type (enum)
+
+Set(alias, name="", description="")    //data type (set)
 ```
 ##### Data types
 ```
@@ -103,6 +105,15 @@ manymany(from, to, verbFrom, verbTo)
 oneone(from, to, verb, keyname='id', type=int())
 depends(from, to, verb)
 ```
+There is an internal relationship `_join`
+```
+_join(from, to, verb, fNum, tNum)
+e.g.
+_join(a, b, has, 0, n)
+```
+You can use this to fine tune relationships as required. fNum & tNum accept an integer
+or 'n'.
+
 #### Physicals Models
 `!include ../dist/DatabasePhysical.iuml`
 
@@ -160,5 +171,3 @@ This software is licensed under the [BSD-3 Clause license](LICENSE.md).
 
 ## To Do
  - complete the DDL generation tool
- - modify the `depends` and `Enum` functionality so that we can differentiate
- between ENUM and SET

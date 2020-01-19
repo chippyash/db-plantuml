@@ -34,6 +34,17 @@ Components
 		enum "name" as alias << (T, green)Enum>>
     !endif
 !endfunction
+'Set (Enum)
+!unquoted function Set(alias, name="", description="")
+	!if (%strlen(name) == 0)
+    	!name = alias
+    !endif
+    !if (%strlen(description) > 0)
+		enum alias as "name\n(description)" << (S, green)Set>>
+	!else
+		enum "name" as alias << (S, green)Set>>
+    !endif
+!endfunction
 
 /'
 Data Types

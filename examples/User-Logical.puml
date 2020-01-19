@@ -61,4 +61,16 @@ i.e. profile has a gender attribute
 that depends on being a specific Type (value)
 end note
 
+Set(fav_colours,Colour) {
+	RED
+	BLUE
+	GREEN
+}
+depends(profile, fav_colours, favourite colours)
+note right on link
+Denotes a dependency.
+i.e. profile has a fav_colours attribute
+that depends on being zero,one or more of a Set
+end note
+
 @enduml

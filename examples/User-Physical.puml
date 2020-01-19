@@ -34,13 +34,24 @@ Type(gender, Gender) {
 	MALE
 	FEMALE
 }
-note right of gender
+note left of gender
 The actual implementation of this is db dependent.
 In MySql et al, the gender column would be defined as
 ""gender enum('MALE','FEMALE')""
 end note
 depends(profile, gender, gender)
 
+Set(fav_colours,Colour) {
+	RED
+	BLUE
+	GREEN
+}
+depends(profile, fav_colours, favourite colours)
+note right of fav_colours
+The actual implementation of this is db dependent.
+In MySql et al, the  column fav_colours would be defined as
+""fav_colours set('RED','BLUE','GREEN')""
+end note
 /'
 This is the extra functionality that the physical rendering provides
 '/
