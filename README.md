@@ -149,6 +149,9 @@ function uses(from, to)      //proc uses table
 These relationships are purely informational.
 
 ## Diagram to SQL conversion
+
+**Coming Soon!**
+
 example command to generate xml
 `java -jar "C:/Program Files/Java/jars/plantuml.jar" -txmi:star .\examples\User-Physical.puml`
 ## To Do
