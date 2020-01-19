@@ -154,6 +154,10 @@ These relationships are purely informational.
 
 example command to generate xml
 `java -jar "C:/Program Files/Java/jars/plantuml.jar" -txmi:star .\examples\User-Physical.puml`
+
+## License
+This software is licensed under the [BSD-3 Clause license](LICENSE.md).
+
 ## To Do
  - complete the DDL generation tool
  - modify the `depends` and `Enum` functionality so that we can differentiate
