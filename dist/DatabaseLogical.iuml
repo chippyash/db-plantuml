@@ -78,22 +78,81 @@ Indexes
 /'
 Entity joins
 '/
+!unquoted function _join($from, $to, $verb, $fNum, $tNum)
+	!if ($fNum == 0)
+		!if ($tNum == 0)
+			$from -- $to: $verb
+		!endif
+		!if ($tNum == 1)
+			$from --* $to: $verb
+		!endif
+		!if ($tNum == 'n')
+			$from --o $to: $verb
+		!endif
+		!if (%intval($tNum) > 1)
+			$from --o "$tNum" $to: $verb
+		!endif
+	!endif
+	!if ($fNum == 1)
+		!if ($tNum == 0)
+			$from -- $to: $verb
+		!endif
+		!if ($tNum == 1)
+			$from *-- $to: $verb
+		!endif
+		!if ($tNum == 'n')
+			$from o-- $to: $verb
+		!endif
+		!if (%intval($tNum) > 1)
+			$from o-- "$tNum" $to: $verb
+		!endif
+	!endif
+	!if ($fNum == 'n')
+		!if ($tNum == 0)
+			$from --o $to: $verb
+		!endif
+		!if ($tNum == 1)
+			$from --o $to: $verb
+		!endif
+		!if ($tNum == 'n')
+			$from o--o $to: $verb
+		!endif
+		!if (%intval($tNum) > 1)
+			$from o--o "$tNum" $to: $verb
+		!endif
+	!endif
+	!if (%intval($fNum) > 1)
+		!if ($tNum == 0)
+			$from "$fNum" o-- $to: $verb
+		!endif
+		!if ($tNum == 1)
+			$from "$fNum" o-- $to: $verb
+		!endif
+		!if ($tNum == 'n')
+			$from "$fNum" o--o $to: $verb
+		!endif
+		!if (%intval($tNum) > 1)
+			$from "$fNum" o--o "$tNum" $to: $verb
+		!endif
+	!endif
+!endfunction
+
 'One to Many
-!unquoted function onemany($from, $to, $verb)
-	$from o-- $to : $verb
+!unquoted function onemany(from, to, verb, fNum=1, tNum='n')
+	_join(from,to,verb,fNum,tNum)
 !endfunction
 
 'Many to Many
 !unquoted function manymany($from, $to, $verbFrom, $verbTo)
-	$from o--o $to : "$verbFrom >\n< $verbTo"
+	_join($from, $to, "$verbFrom >\n< $verbTo", n, n)
 !endfunction
 
 'One To One
-!unquoted function oneone($from, $to, $verb)
-	$from *-- $to : $verb
+!unquoted function oneone(from, to, verb, keyname='id', type=int())
+	_join(from,to,verb,1,1)
 !endfunction
 
-'Dependency
+'Type Dependency
 !unquoted function depends($from, $to, $verb)
 	$from --> $to : $verb
 !endfunction

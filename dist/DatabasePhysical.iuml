@@ -95,12 +95,71 @@ Foreign keys. By default FKs are <tablename>_id and are integers
 !endfunction
 
 /'
-Entity joins
+Table joins
 '/
+!unquoted function _join($from, $to, $verb, $fNum, $tNum)
+	!if ($fNum == 0)
+		!if ($tNum == 0)
+			$from |o--o| $to: $verb
+		!endif
+		!if ($tNum == 1)
+			$from |o--|| $to: $verb
+		!endif
+		!if ($tNum == 'n')
+			$from |o--|{ $to: $verb
+		!endif
+		!if (%intval($tNum) > 1)
+			$from |o--|{ "$tNum" $to: $verb
+		!endif
+	!endif
+	!if ($fNum == 1)
+		!if ($tNum == 0)
+			$from ||--o| $to: $verb
+		!endif
+		!if ($tNum == 1)
+			$from ||--|| $to: $verb
+		!endif
+		!if ($tNum == 'n')
+			$from ||--|{ $to: $verb
+		!endif
+		!if (%intval($tNum) > 1)
+			$from ||--|{ "$tNum" $to: $verb
+		!endif
+	!endif
+	!if ($fNum == 'n')
+		!if ($tNum == 0)
+			$from }|--o| $to: $verb
+		!endif
+		!if ($tNum == 1)
+			$from }|--|| $to: $verb
+		!endif
+		!if ($tNum == 'n')
+			$from }|--|{ $to: $verb
+		!endif
+		!if (%intval($tNum) > 1)
+			$from }|--|{ "$tNum" $to: $verb
+		!endif
+	!endif
+	!if (%intval($fNum) > 1)
+		!if ($tNum == 0)
+			$from "$fNum" }|--o| $to: $verb
+		!endif
+		!if ($tNum == 1)
+			$from "$fNum" }|--|| $to: $verb
+		!endif
+		!if ($tNum == 'n')
+			$from "$fNum" }|--|{ $to: $verb
+		!endif
+		!if (%intval($tNum) > 1)
+			$from "$fNum" }|--|{ "$tNum" $to: $verb
+		!endif
+	!endif
+!endfunction
+
 'One to Many
-!unquoted function onemany($from, $to, $verb, $fNum=0, $tNum='n')
-	$from "$fNum" --{ "$tNum" $to : $verb
-	$to : foreign_key($from, $to)
+!unquoted function onemany(from, to, verb, fNum=1, tNum='n')
+	_join(from,to,verb,fNum,tNum)
+	to : foreign_key(from, to)
 !endfunction
 
 'Many to Many
@@ -114,12 +173,12 @@ Entity joins
 !endfunction
 
 'One To One
-!unquoted function oneone($from, $to, $verb, $keyname='id', $type=int())
-	$from "1" -- "1" $to : $verb
-	$to : primary($keyname, $type, 0)
+!unquoted function oneone(from, to, verb, keyname='id', type=int())
+	_join(from,to,verb,1,1)
+	to : primary(keyname, type, 0)
 !endfunction
 
-'Dependency
+'Type Dependency
 !unquoted function depends($from, $to, $verb)
 	$from --> $to : $verb
 	$from : $to : $to NOT NULL

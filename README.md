@@ -5,7 +5,7 @@
 
 1. Provides Plantuml !include files that you can use to create
 logical and physical database diagrams
-2. Provides a (PHP) utility to turn the diagrams into DBL files to create
+2. Provides a (PHP) utility to turn the diagrams into DDL files to create
 your database (coming soon!)
 
 ## PlantUml Support
@@ -98,9 +98,9 @@ idx3(name1, name2, name3)  //non unique index - three members
 ```
 ##### Relationships
 ```
-onemany(from, to, verb)
+onemany(from, to, verb, fNum=1, tNum='n')
 manymany(from, to, verbFrom, verbTo)
-oneone(from, to, verb)
+oneone(from, to, verb, keyname='id', type=int())
 depends(from, to, verb)
 ```
 #### Physicals Models
