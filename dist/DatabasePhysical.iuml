@@ -1,0 +1,141 @@
+@startuml
+/'
+ * PlantUml Physical Database support
+ *
+ * @author    Ashley Kitson
+ * @license   BSD-3 Clause
+ * @copyright Ashley Kitson, UK, 2020
+'/
+/'
+Components
+'/
+'Physical diagrams deal with Tables, so mark class a T
+!unquoted function Table(alias, name="", description="")
+	!if (%strlen(name) == 0)
+		!name = alias
+	!endif
+	!if (%strlen(description) > 0)
+		class alias as "name\n(description)" << (T,red)Table >>
+    !else
+    	class "name" as alias << (T,red)Table >>
+	!endif
+!endfunction
+'Psuedonym for Table
+!define Entity(alias, name="", description="") Table(alias, name, description)
+
+' Type (Enum)
+!unquoted function Type(alias, name="", description="")
+	!if (%strlen(name) == 0)
+    	!name = alias
+    !endif
+    !if (%strlen(description) > 0)
+		enum alias as "name\n(description)" << (T, green)Enum>>
+	!else
+		enum "name" as alias << (T, green)Enum>>
+    !endif
+!endfunction
+
+!define Trigger(alias, name) class "name" as alias << (G, Cyan)Trigger >> #cyan
+!define Proc(alias, name) class "name" as alias << (P, Cyan)Proc >> #cyan
+!define View(alias, name) class "name" as alias << (V,cyan)View >>
+
+/'
+Data Types
+'/
+!define string(l=30) VARCHAR[l]
+!define text() TEXT
+!define date() DATE
+!define time() TIME
+!define datetime() DATETIME
+!define int(l=8) INT[l]
+!define real() DOUBLE
+!define bool() BOOLEAN
+
+/'
+Data Type modifiers
+'/
+!define not_null(x, t) x t NOT NULL
+
+/'
+Indexes
+'/
+'Primary key is bold. By default PKs are called 'id' and are autoincrement Integers
+!unquoted function primary($name = 'id', $type=int(), $auto=1)
+	!if ($auto == 1)
+		!$autoincrement = 'AUTOINCREMENT'
+	!else
+		!$autoincrement = ''
+	!endif
+	$name $type PRIMARY KEY $autoincrement
+!endfunction
+
+'Non unique index
+!unquoted function idx($name, $type=int())
+	$name $type
+	index($name)
+!endfunction
+
+'Unique Index
+!unquoted function unique($name, $type=int())
+	$name $type
+	key($name)
+!endfunction
+
+'Generic index definitions
+!define idx2(name1, name2) index(name1, name2)
+!define idx3(name1, name2, name3) index(name1, name2, name3)
+
+/'
+Foreign keys. By default FKs are <tablename>_id and are integers
+'/
+!unquoted function foreign_key($tableName, $to, $type=int(), $suffix='_id')
+	!$fkname = $tableName + $suffix
+	$fkname $type
+	$to : fk($fkname, $tableName)
+!endfunction
+
+/'
+Entity joins
+'/
+'One to Many
+!unquoted function onemany($from, $to, $verb, $fNum=0, $tNum='n')
+	$from "$fNum" --{ "$tNum" $to : $verb
+	$to : foreign_key($from, $to)
+!endfunction
+
+'Many to Many
+!unquoted function manymany($from, $to, $verbFrom, $verbTo)
+	!$tId = $from + $to
+	!$tNm = $from + '_' + $to
+	Table($tId, $tNm) {
+	}
+	onemany($from, $tId, $verbFrom)
+	onemany($to, $tId, $verbTo)
+!endfunction
+
+'One To One
+!unquoted function oneone($from, $to, $verb, $keyname='id', $type=int())
+	$from "1" -- "1" $to : $verb
+	$to : primary($keyname, $type, 0)
+!endfunction
+
+'Dependency
+!unquoted function depends($from, $to, $verb)
+	$from --> $to : $verb
+	$from : $to : $to NOT NULL
+!endfunction
+
+'table action trigger
+!unquoted function triggers($from, $to)
+	$from .> $to
+!endfunction
+
+'proc uses table
+!unquoted function uses($from, $to)
+	$from ..> $to
+!endfunction
+
+hide stereotypes
+hide empty members
+
+@enduml

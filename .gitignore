@@ -1,0 +1,7 @@
+vendor
+tests
+src
+.phpunit.result.cache
+composer.*
+phpunit.xml
+VERSION

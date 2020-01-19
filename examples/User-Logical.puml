@@ -1,0 +1,64 @@
+@startuml
+title User Logical Design
+!include ../dist/DatabaseLogical.iuml
+footer Created by chippyash/db-plantuml
+
+Table(user, user, User in our system) {
+	primary()
+	idx(tag, string(30))
+	unique('username', string(30))
+	not_null(bar, text())
+	not_null(password, string(30))
+	idx2(bar, password)
+}
+note right of user
+It's debatable as to whether we should be identifying
+indexes and unique indexes (keys) at the logical level. Identifying
+a primary key is usually required. If the PK is a string then
+it is as well to create the psuedo int PK and add the actual
+key as a unique key element for clarity.
+end note
+Table(session, session, session for user) {
+	primary()
+	not_null(data, text)
+}
+onemany(user,session,'can have')
+note right on link
+A one to many
+relationship
+end note
+
+Table(profile, profile, Some info of user) {
+age int()
+not_null(birthday, datetime())
+}
+oneone(user,profile,'has a')
+note right on link
+A one to one relationship.
+Usually a reason to refactor
+at the physical design stage
+end note
+
+Table(group, group, group of users) {
+	primary()
+	not_null(name, string(20))
+}
+manymany(user, group, 'can be in', 'can have')
+
+note top on link
+A many to many
+relationship
+end note
+
+Type(gender, Gender) {
+	MALE
+	FEMALE
+}
+depends(profile, gender, gender)
+note right on link
+Denotes a dependency.
+i.e. profile has a gender attribute
+that depends on being a specific Type (value)
+end note
+
+@enduml

@@ -1,0 +1,104 @@
+@startuml
+/'
+ * PlantUml Logical Database support
+ *
+ * @author    Ashley Kitson
+ * @license   BSD-3 Clause
+ * @copyright Ashley Kitson, UK, 2020
+'/
+/'
+Components
+'/
+'Logical diagrams deal with Entity, so mark Table class a E
+!unquoted function Table(alias, name="", description="")
+	!if (%strlen(name) == 0)
+		!name = alias
+	!endif
+	!if (%strlen(description) > 0)
+		class alias as "name\n(description)" << (E,#FFAAAA)Table>>
+	!else
+		class "name" as alias << (E,#FFAAAA)Table>>
+	!endif
+!endfunction
+'Psuedonym for Table
+!define Entity(alias, name="", description="") Table(alias, name, description)
+
+'Type (Enum)
+!unquoted function Type(alias, name="", description="")
+	!if (%strlen(name) == 0)
+    	!name = alias
+    !endif
+    !if (%strlen(description) > 0)
+		enum alias as "name\n(description)" << (T, green)Enum>>
+	!else
+		enum "name" as alias << (T, green)Enum>>
+    !endif
+!endfunction
+
+/'
+Data Types
+'/
+!define string(l=30) string
+!define text() text
+!define date() date
+!define time() time
+!define datetime() datetime
+!define int(l=8) int
+!define real() real
+!define bool() boolean
+
+/'
+Data Type modifiers
+'/
+!define not_null(name, type) name type not empty
+
+/'
+Indexes
+'/
+'Primary key is bold. By default PKs are called 'id' and are autoincrement Integers
+!unquoted function primary($name = 'id', $type=int(), $auto=1)
+	!$autoincrement = ''
+	<b>PK $name</b> :$type $autoincrement
+!endfunction
+
+'Non unique index
+!unquoted function idx($name, $type=int())
+	<color:blue>IDX $name</color> :$type
+!endfunction
+
+'Unique Index
+!unquoted function unique($name, $type=int())
+	<color:blue>KEY $name</color> :$type
+!endfunction
+
+'Generic index definitions
+!define idx2(name1, name2) <i>index(name1, name2)</i>
+!define idx3(name1, name2, name3) <i>index(name1, name2, name3)</i>
+
+/'
+Entity joins
+'/
+'One to Many
+!unquoted function onemany($from, $to, $verb)
+	$from o-- $to : $verb
+!endfunction
+
+'Many to Many
+!unquoted function manymany($from, $to, $verbFrom, $verbTo)
+	$from o--o $to : "$verbFrom >\n< $verbTo"
+!endfunction
+
+'One To One
+!unquoted function oneone($from, $to, $verb)
+	$from *-- $to : $verb
+!endfunction
+
+'Dependency
+!unquoted function depends($from, $to, $verb)
+	$from --> $to : $verb
+!endfunction
+
+
+hide stereotypes
+hide empty members
+@enduml

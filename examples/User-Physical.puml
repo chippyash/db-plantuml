@@ -1,0 +1,64 @@
+@startuml
+title User Physical Design
+!include ../dist/DatabasePhysical.iuml
+footer Created by chippyash/db-plantuml
+
+Table(user, user, User in our system) {
+	primary()
+	idx(tag, string(30))
+	unique('username', string(30))
+	not_null(bar, text())
+	not_null(password, string(30))
+	idx2(bar, password)
+}
+
+Table(session, session, session for user) {
+	primary()
+	not_null(data, text)
+}
+onemany(user,session,'can have')
+
+Table(profile, profile, Some info of user) {
+age SMALLINT
+not_null(birthday, datetime())
+}
+oneone(user,profile,'has a')
+
+Table(group, group, group of users) {
+	primary()
+	not_null(name, string(20))
+}
+manymany(user, group, 'can be in', 'can have')
+
+Type(gender, Gender) {
+	MALE
+	FEMALE
+}
+note right of gender
+The actual implementation of this is db dependent.
+In MySql et al, the gender column would be defined as
+""gender enum('MALE','FEMALE')""
+end note
+depends(profile, gender, gender)
+
+/'
+This is the extra functionality that the physical rendering provides
+'/
+'comment out next line to not see trigger and proc methods
+show methods
+
+View(v1, sessions) {
+select(user_id, data\nfrom user, session\njoin id on user_id)
+}
+
+Trigger(t1, 'UserUpdate') {
+	beforeUpdate()
+	afterUpdate()
+}
+triggers(user, t1)
+Proc(p1, StoredProcs) {
+	addUser(uid, guid)
+}
+uses(p1, user)
+uses(p1, group)
+@enduml
