@@ -48,7 +48,11 @@ statement. Amend as necessary.
 3. (Optional) Generate the SQL DDL file to create your database
 
 #### Logical Models
-`!include ../dist/DatabaseLogical.iuml` or `!includeurl`
+`!include ../dist/DatabaseLogical.iuml`
+
+or
+
+`!includeurl https://raw.githubusercontent.com/chippyash/db-plantuml/master/dist/DatabaseLogical.iuml`
 
 ![examples/User-Logical.puml](examples/User_Logical.png)
 Logical model will display the following differently to their representation
@@ -100,7 +104,11 @@ oneone(from, to, verb)
 depends(from, to, verb)
 ```
 #### Physicals Models
-`!include ../dist/DatabasePhysical.iuml` or `!includeurl`
+`!include ../dist/DatabasePhysical.iuml`
+
+or
+
+`!includeurl https://raw.githubusercontent.com/chippyash/db-plantuml/master/dist/DatabasePhysical.iuml`
 
 ![examples/User-Physical.puml](examples/User_Physical.png)
 
