@@ -95,10 +95,10 @@ Entity joins
 			$from -- $to: $verb
 		!endif
 		!if ($tNum == 1)
-			$from --* $to: $verb
+			$from "0" o-- "1" $to: $verb
 		!endif
 		!if ($tNum == 'n')
-			$from --o $to: $verb
+			$from "0" o-- $to: $verb
 		!endif
 		!if (%intval($tNum) > 1)
 			$from --o "$tNum" $to: $verb
@@ -148,9 +148,14 @@ Entity joins
 	!endif
 !endfunction
 
+'Zero, one or more to many
+!unquoted function zeromany(from, to, verb, tNum='n')
+	_join(from,to,verb,0,tNum)
+!endfunction
+
 'One to Many
-!unquoted function onemany(from, to, verb, fNum=1, tNum='n')
-	_join(from,to,verb,fNum,tNum)
+!unquoted function onemany(from, to, verb, tNum='n')
+	_join(from,to,verb,1,tNum)
 !endfunction
 
 'Many to Many

@@ -100,7 +100,8 @@ idx3(name1, name2, name3)  //non unique index - three members
 ```
 ##### Relationships
 ```
-onemany(from, to, verb, fNum=1, tNum='n')
+zeromany(from, to, verb, tNum='n')
+onemany(from, to, verb, tNum='n')
 manymany(from, to, verbFrom, verbTo)
 oneone(from, to, verb, keyname='id', type=int())
 depends(from, to, verb)

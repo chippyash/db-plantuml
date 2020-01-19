@@ -22,9 +22,18 @@ Table(session, session, session for user) {
 	primary()
 	not_null(data, text)
 }
-onemany(user,session,'can have')
+onemany(user,session,'will have')
 note right on link
 A one to many
+relationship
+end note
+
+Entity(ac, account) {
+    idx(logon, string())
+}
+zeromany(user,ac,may have)
+note right on link
+0+ to many
 relationship
 end note
 

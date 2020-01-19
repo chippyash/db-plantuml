@@ -16,7 +16,12 @@ Table(session, session, session for user) {
 	primary()
 	not_null(data, text)
 }
-onemany(user,session,'can have')
+onemany(user,session,'will have')
+
+Entity(ac, account) {
+    idx(logon, string())
+}
+zeromany(user,ac,may have)
 
 Table(profile, profile, Some info of user) {
 age SMALLINT

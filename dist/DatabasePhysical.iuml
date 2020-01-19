@@ -167,9 +167,15 @@ Table joins
 	!endif
 !endfunction
 
+'Zero, one or more to many
+!unquoted function zeromany(from, to, verb, tNum='n')
+	_join(from,to,verb,0,tNum)
+	to : foreign_key(from, to)
+!endfunction
+
 'One to Many
-!unquoted function onemany(from, to, verb, fNum=1, tNum='n')
-	_join(from,to,verb,fNum,tNum)
+!unquoted function onemany(from, to, verb, tNum='n')
+	_join(from,to,verb,1,tNum)
 	to : foreign_key(from, to)
 !endfunction
 
