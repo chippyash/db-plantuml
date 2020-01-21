@@ -41,11 +41,17 @@ function declations that allows the transform to happen.
 There is no real need to install this code base. You can access the
 required files remotely using the `!includeurl` directive.
 
+_You do however, need to install [PlantUml](http://plantuml.com/)_!
+
 ### Usage
 1. Create your logical model to represent customer/user view
 2. Copy logical model file to physical model file and change the !include
 statement. Amend as necessary.
 3. (Optional) Generate the SQL DDL file to create your database
+
+**NB. This project is still in alpha stage. Whilst changes to the available Puml commands
+will remain largely stable, there may be small changes in order to facilitate the 
+generation of SQL DDL which is currently ongoing**
 
 #### Logical Models
 `!include ../dist/DatabaseLogical.iuml`
