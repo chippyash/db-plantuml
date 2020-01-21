@@ -169,8 +169,9 @@ Entity joins
 !endfunction
 
 'Type Dependency
-!unquoted function depends($from, $to, $verb)
-	$from --> $to : $verb
+!unquoted function depends($from, $to, $colName)
+    $from : $colName $to
+	$from::$colName --> $to : $colName
 !endfunction
 
 

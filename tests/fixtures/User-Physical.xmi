@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?><XMI xmlns:UML="href://org.omg/UML/1.3" xmi.version="1.1">
+    <XMI.header>
+        <XMI.metamodel xmi.name="UML" xmi.version="1.3"/>
+    </XMI.header>
+    <XMI.content>
+        <UML:Model name="PlantUML" xmi.id="model1">
+            <UML:Namespace.ownedElement>
+                <UML:Class name="user" namespace="model1" xmi.id="cl0002">
+                    <UML:ModelElement.stereotype>
+                        <UML:Stereotype name="Table"/>
+                    </UML:ModelElement.stereotype>
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="id INT[8] PRIMARY KEY AUTOINCREMENT" xmi.id="att29"/>
+                        <UML:Attribute name="tag VARCHAR[30]" xmi.id="att30"/>
+                        <UML:Attribute name="username VARCHAR[30]" xmi.id="att31"/>
+                        <UML:Attribute name="bar TEXT NOT NULL" xmi.id="att32"/>
+                        <UML:Attribute name="password VARCHAR[30] NOT NULL" xmi.id="att33"/>
+                        <UML:Operation name="index(tag)" xmi.id="att34"/>
+                        <UML:Operation name="key(username)" xmi.id="att35"/>
+                        <UML:Operation name="index(bar, password)" xmi.id="att36"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="session" namespace="model1" xmi.id="cl0003">
+                    <UML:ModelElement.stereotype>
+                        <UML:Stereotype name="Table"/>
+                    </UML:ModelElement.stereotype>
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="id INT[8] PRIMARY KEY AUTOINCREMENT" xmi.id="att37"/>
+                        <UML:Attribute name="data text NOT NULL" xmi.id="att38"/>
+                        <UML:Attribute name="user_id INT[8]" xmi.id="att39"/>
+                        <UML:Operation name="fk(user_id, user)" xmi.id="att40"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="account" namespace="model1" xmi.id="cl0005">
+                    <UML:ModelElement.stereotype>
+                        <UML:Stereotype name="Table"/>
+                    </UML:ModelElement.stereotype>
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="logon VARCHAR[30]" xmi.id="att41"/>
+                        <UML:Attribute name="user_id INT[8]" xmi.id="att42"/>
+                        <UML:Operation name="index(logon)" xmi.id="att43"/>
+                        <UML:Operation name="fk(user_id, user)" xmi.id="att44"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="profile" namespace="model1" xmi.id="cl0007">
+                    <UML:ModelElement.stereotype>
+                        <UML:Stereotype name="Table"/>
+                    </UML:ModelElement.stereotype>
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="age SMALLINT" xmi.id="att45"/>
+                        <UML:Attribute name="birthday DATETIME NOT NULL" xmi.id="att46"/>
+                        <UML:Attribute name="id INT[8] PRIMARY KEY" xmi.id="att47"/>
+                        <UML:Attribute name="gender gender NOT NULL" xmi.id="att48"/>
+                        <UML:Attribute name="fav_colours fav_colours NOT NULL" xmi.id="att49"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="group" namespace="model1" xmi.id="cl0009">
+                    <UML:ModelElement.stereotype>
+                        <UML:Stereotype name="Table"/>
+                    </UML:ModelElement.stereotype>
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="id INT[8] PRIMARY KEY AUTOINCREMENT" xmi.id="att50"/>
+                        <UML:Attribute name="name VARCHAR[20] NOT NULL" xmi.id="att51"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="user_group" namespace="model1" xmi.id="cl0010">
+                    <UML:ModelElement.stereotype>
+                        <UML:Stereotype name="Table"/>
+                    </UML:ModelElement.stereotype>
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="user_id INT[8]" xmi.id="att52"/>
+                        <UML:Attribute name="group_id INT[8]" xmi.id="att53"/>
+                        <UML:Operation name="fk(user_id, user)" xmi.id="att54"/>
+                        <UML:Operation name="fk(group_id, group)" xmi.id="att55"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Gender" namespace="model1" xmi.id="cl0013">
+                    <UML:ModelElement.stereotype>
+                        <UML:Stereotype name="Enum"/>
+                    </UML:ModelElement.stereotype>
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="MALE" xmi.id="att56"/>
+                        <UML:Attribute name="FEMALE" xmi.id="att57"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Colour" namespace="model1" xmi.id="cl0018">
+                    <UML:ModelElement.stereotype>
+                        <UML:Stereotype name="Set"/>
+                    </UML:ModelElement.stereotype>
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="RED" xmi.id="att58"/>
+                        <UML:Attribute name="BLUE" xmi.id="att59"/>
+                        <UML:Attribute name="GREEN" xmi.id="att60"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="sessions" namespace="model1" xmi.id="cl0023">
+                    <UML:ModelElement.stereotype>
+                        <UML:Stereotype name="View"/>
+                    </UML:ModelElement.stereotype>
+                    <UML:Classifier.feature>
+                        <UML:Operation name="select(user_id, data\nfrom user, session\njoin id on user_id)" xmi.id="att61"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="UserUpdate" namespace="model1" xmi.id="cl0024">
+                    <UML:ModelElement.stereotype>
+                        <UML:Stereotype name="Trigger"/>
+                    </UML:ModelElement.stereotype>
+                    <UML:Classifier.feature>
+                        <UML:Operation name="beforeUpdate()" xmi.id="att62"/>
+                        <UML:Operation name="afterUpdate()" xmi.id="att63"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="StoredProcs" namespace="model1" xmi.id="cl0026">
+                    <UML:ModelElement.stereotype>
+                        <UML:Stereotype name="Proc"/>
+                    </UML:ModelElement.stereotype>
+                    <UML:Classifier.feature>
+                        <UML:Operation name="addUser(uid, guid)" xmi.id="att64"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Association name="will have" namespace="model1" xmi.id="ass65">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd association="ass65" type="cl0002" xmi.id="end66">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass65" type="cl0003" xmi.id="end67">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association name="may have" namespace="model1" xmi.id="ass68">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd association="ass68" type="cl0002" xmi.id="end69">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass68" type="cl0005" xmi.id="end70">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association name="has a" namespace="model1" xmi.id="ass71">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd association="ass71" type="cl0002" xmi.id="end72">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass71" type="cl0007" xmi.id="end73">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association name="can be in" namespace="model1" xmi.id="ass74">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd association="ass74" type="cl0002" xmi.id="end75">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass74" type="cl0010" xmi.id="end76">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association name="can have" namespace="model1" xmi.id="ass77">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd association="ass77" type="cl0009" xmi.id="end78">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass77" type="cl0010" xmi.id="end79">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association namespace="model1" xmi.id="ass80">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd association="ass80" type="cl0015" xmi.id="end81">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass80" type="cl0013" xmi.id="end82">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association name="gender" namespace="model1" xmi.id="ass83">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd association="ass83" type="cl0007" xmi.id="end84">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass83" type="cl0013" xmi.id="end85">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association name="fav_colours" namespace="model1" xmi.id="ass86">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd association="ass86" type="cl0007" xmi.id="end87">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass86" type="cl0018" xmi.id="end88">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association namespace="model1" xmi.id="ass89">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd association="ass89" type="cl0018" xmi.id="end90">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass89" type="cl0021" xmi.id="end91">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association namespace="model1" xmi.id="ass92">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd association="ass92" type="cl0002" xmi.id="end93">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass92" type="cl0024" xmi.id="end94">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association namespace="model1" xmi.id="ass95">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd association="ass95" type="cl0026" xmi.id="end96">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass95" type="cl0002" xmi.id="end97">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association namespace="model1" xmi.id="ass98">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd association="ass98" type="cl0026" xmi.id="end99">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass98" type="cl0009" xmi.id="end100">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+            </UML:Namespace.ownedElement>
+        </UML:Model>
+    </XMI.content>
+</XMI>

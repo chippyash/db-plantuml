@@ -196,9 +196,9 @@ Table joins
 !endfunction
 
 'Type Dependency
-!unquoted function depends($from, $to, $verb)
-	$from --> $to : $verb
-	$from : $to : $to NOT NULL
+!unquoted function depends($from, $to, $colName)
+	$from : $to $colName NOT NULL
+	$from::$colName --> $to : $colName
 !endfunction
 
 'table action trigger

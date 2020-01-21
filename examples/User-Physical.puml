@@ -1,7 +1,6 @@
 @startuml
 title User Physical Design
 !include ../dist/DatabasePhysical.iuml
-footer Created by chippyash/db-plantuml
 
 Table(user, user, User in our system) {
 	primary()
@@ -51,7 +50,7 @@ Set(fav_colours,Colour) {
 	BLUE
 	GREEN
 }
-depends(profile, fav_colours, favourite colours)
+depends(profile, fav_colours, fav_colours)
 note right of fav_colours
 The actual implementation of this is db dependent.
 In MySql et al, the  column fav_colours would be defined as

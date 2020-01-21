@@ -1,7 +1,4 @@
-vendor
-tests
-src
 .phpunit.result.cache
-composer.*
+composer.lock
 phpunit.xml
-VERSION
+vendor

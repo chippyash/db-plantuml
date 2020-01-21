@@ -75,7 +75,7 @@ Set(fav_colours,Colour) {
 	BLUE
 	GREEN
 }
-depends(profile, fav_colours, favourite colours)
+depends(profile, fav_colours, fav_colours)
 note right on link
 Denotes a dependency.
 i.e. profile has a fav_colours attribute

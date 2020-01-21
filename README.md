@@ -110,7 +110,7 @@ zeromany(from, to, verb, tNum='n')
 onemany(from, to, verb, tNum='n')
 manymany(from, to, verbFrom, verbTo)
 oneone(from, to, verb, keyname='id', type=int())
-depends(from, to, verb)
+depends(from, to, colname)  //enum and set dependencies
 ```
 There is an internal relationship `_join`
 ```
