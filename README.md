@@ -6,7 +6,7 @@
 1. Provides Plantuml !include files that you can use to create
 logical and physical database diagrams
 2. Provides a (PHP) utility to turn the diagrams into DDL files to create
-your database (coming soon!)
+your database.
 
 ## PlantUml Support
 
