@@ -5,7 +5,7 @@ SHELL := /bin/bash
 ## Applications
 COMPOSER ?= composer
 BOX ?= box
-BIN ?= bin/vupdate
+BIN ?= /home/akitson/Projects/cli/semantic-version-updater/bin/vupdate
 GIT ?= git
 
 # Helpers
