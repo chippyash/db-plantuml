@@ -9,7 +9,7 @@ BIN ?= /home/akitson/Projects/cli/semantic-version-updater/bin/vupdate
 GIT ?= git
 
 # Helpers
-all: build push
+all: version build push
 
 .PHONY: all
 
@@ -22,9 +22,11 @@ depend:
 
 # Building
 build:
-	${BIN}
 	${BOX} compile
 	chmod a+x bin/pumldbconv
+
+version:
+	${BIN}
 
 push:
 	${GIT} add --all
@@ -32,7 +34,7 @@ push:
 	${GIT} tag $$(cat VERSION)
 	${GIT} push origin master --tags
 
-.PHONY: build push
+.PHONY: build version push
 
 # Cleaning
 clean:
