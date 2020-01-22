@@ -24,12 +24,24 @@ abstract class AbstractRenderer implements DDlRendering
 {
     public function renderDdl(PumlSchema $schema): string
     {
-        $out = $this->renderTables($schema);
+        $out = $this->renderTables($schema)
+            . $this->renderIndexes($schema)
+            . $this->renderViews($schema)
+            . $this->renderProcs($schema)
+            . $this->renderTriggers($schema);
 
         return $out;
     }
 
     abstract protected function renderTables(PumlSchema $schema): string;
+
+    abstract protected function renderIndexes(PumlSchema $schema): string;
+
+    abstract protected function renderViews(PumlSchema $schema): string;
+
+    abstract protected function renderProcs(PumlSchema $schema): string;
+
+    abstract protected function renderTriggers(PumlSchema $schema): string;
 
     abstract protected function getRenderedAliasColTypes(PumlSchema $schema): array;
 

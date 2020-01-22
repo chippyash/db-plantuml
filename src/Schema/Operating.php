@@ -22,15 +22,15 @@ trait Operating
     }
 
     /**
-     * @return mixed
+     * @return array [id => opContent]
      */
-    public function getOperations()
+    public function getOperations(): array
     {
         return $this->operations;
     }
 
     protected function parseOperation(string $content)
     {
-        return false;
+        return $content;
     }
 }

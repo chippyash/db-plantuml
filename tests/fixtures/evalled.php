@@ -114,7 +114,7 @@ $views->addView(
     (new PumlView(
         "cl0023", "sessions"
     ))
-        ->addOperation("att61", "select(user_id, data\nfrom user, session\njoin id on user_id)"
+        ->addOperation("att61", "select(user_id, data from user\njoin session on\n(user.id = session.user_id))"
         )
 );
 
@@ -133,7 +133,7 @@ $procs->addProc(
         "cl0026",
         "StoredProcs"
     ))
-        ->addOperation("att64", "addUser(uid, guid)"
+        ->addOperation("att64", "addUser(IN uid INT, IN guid INT)"
         )
 );
 

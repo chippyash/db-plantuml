@@ -27,7 +27,7 @@ class MysqlRendererTest extends TestCase
     public function testTablesAreRendered()
     {
         $output = $this->sut->renderDdl($this->schema);
-        var_dump($output);
+        print_r($output);
     }
 
     protected function setUp(): void

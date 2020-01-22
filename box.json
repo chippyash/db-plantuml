@@ -1,0 +1,23 @@
+{
+  "directories":[
+    "src"
+  ],
+  "finder": [
+    {
+      "name": "*.php",
+      "exclude": ["tests", "Tests"],
+      "in":"vendor"
+    },
+    {
+      "name": "VERSION",
+      "in": "."
+    },
+    {
+      "name": "LICENSE.md",
+      "in": "."
+    }
+  ],
+  "main": "src/pumldbconv.php",
+  "output": "bin/pumldbconv",
+  "git-version":"package-version"
+}

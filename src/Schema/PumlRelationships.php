@@ -51,4 +51,12 @@ class PumlRelationships
         }
         return array_pop($rels);
     }
+
+    /**
+     * @return PumlRelationship[]
+     */
+    public function getRelations(): array
+    {
+        return $this->relations;
+    }
 }

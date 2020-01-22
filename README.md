@@ -49,10 +49,6 @@ _You do however, need to install [PlantUml](http://plantuml.com/)_!
 statement. Amend as necessary.
 3. (Optional) Generate the SQL DDL file to create your database
 
-**NB. This project is still in alpha stage. Whilst changes to the available Puml commands
-will remain largely stable, there may be small changes in order to facilitate the 
-generation of SQL DDL which is currently ongoing**
-
 #### Logical Models
 `!include ../dist/DatabaseLogical.iuml`
 
@@ -138,6 +134,10 @@ e.g.
 Trigger(t1, UserUpdate) {
     beforeUpdate()
     afterUpdate()
+    beforeInsert()
+    afterInsert()
+    beforeDelete()
+    afterDelete()
 }
 
 Proc(alias, name)
@@ -164,17 +164,173 @@ in your model. You may need to explicitly declare them for Tables that are off m
 function triggers(from, to)  //table actions trigger
 function uses(from, to)      //proc uses table
 ```
-These relationships are purely informational.
+These `uses` relationships is purely informational.
 
 ## Diagram to SQL conversion
 
-**Coming Soon!**
+A PHP utility CLI program that will convert your physical diagram to SQL DDL.
 
-example command to generate xml
-`java -jar "C:/Program Files/Java/jars/plantuml.jar" -txmi:star .\examples\User-Physical.puml`
+MySql is supported at this release.
+
+### Basic usage
+`bin/pumldbconv g ./examples/User-Physical.puml ./out.sql`
+
+Which will convert the example physical diagram into SQL looking thus:
+```sql
+CREATE TABLE `user` (
+    `id` INT(8) PRIMARY KEY AUTO_INCREMENT,
+    `tag` VARCHAR(30),
+    `username` VARCHAR(30),
+    `bar` TEXT NOT NULL,
+    `password` VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE `session` (
+    `id` INT(8) PRIMARY KEY AUTO_INCREMENT,
+    `data` text NOT NULL,
+    `user_id` INT(8)
+);
+
+CREATE TABLE `account` (
+    `logon` VARCHAR(30),
+    `user_id` INT(8)
+);
+
+CREATE TABLE `profile` (
+    `age` SMALLINT,
+    `birthday` DATETIME NOT NULL,
+    `id` INT(8) PRIMARY KEY,
+    `gender` enum('MALE','FEMALE') NOT NULL,
+    `fav_colours` set('RED','BLUE','GREEN') NOT NULL
+);
+
+CREATE TABLE `group` (
+    `id` INT(8) PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE `user_group` (
+    `user_id` INT(8),
+    `group_id` INT(8)
+);
+
+CREATE INDEX idx_att34 ON user (`tag`);
+
+CREATE UNIQUE INDEX idx_att35 ON user (`username`);
+
+CREATE INDEX idx_att36 ON user (`username`,`password`);
+
+ALTER TABLE `session` ADD FOREIGN KEY fk_att40 (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT;
+
+CREATE INDEX idx_att43 ON account (`logon`);
+
+ALTER TABLE `account` ADD FOREIGN KEY fk_att44 (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT;
+
+ALTER TABLE `user_group` ADD FOREIGN KEY fk_att54 (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT;
+
+ALTER TABLE `user_group` ADD FOREIGN KEY fk_att55 (`group_id`)
+    REFERENCES `group` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT;
+
+CREATE VIEW `sessions` 
+    AS SELECT user_id, data from user join session on (user.id = session.user_id);
+
+DELIMITER //
+
+CREATE PROCEDURE sp_StoredProcs_addUser(IN uid INT, IN guid INT)
+    BEGIN
+        # complete proc body and parameter typing
+    END;
+
+DELIMITER ;
+
+CREATE DEFINER=`root`@`localhost` TRIGGER UserUpdate_beforeUpdate
+    BEFORE UPDATE ON `user` FOR EACH ROW
+    BEGIN
+        # complete trigger body and declaration
+    END;
+
+CREATE DEFINER=`root`@`localhost` TRIGGER UserUpdate_afterUpdate
+    AFTER UPDATE ON `user` FOR EACH ROW
+    BEGIN
+        # complete trigger body and declaration
+    END;
+
+``` 
+
+The program assumes that your plantuml.jar is located at:
+- /usr/share/plantuml/plantuml.jar for Linux
+- "C:/Program Files/Java/jars/plantuml.jar" for Windows
+
+If this is not the case, you can specify the folder location with the `-p` flag e.g.:
+`bin/pumdbconv g -p /usr/local/javajars ./examples/User-Physical.puml ./out.sql`
+
+### Installation - production use
+- Clone/Fork this repo or grab an archive and unzip it
+- Move the bin/pumldbconv file into a directory in your path, perhaps `/usr/local/bin`
+- Check that you can execute it with `pumlodbconv -v` 
+- Remove the source files if no longer required
+
+### Installation - development
+Caveat: These instructions assume a Linux OS. (If you are a Windows/Mac user, 
+please consider adding installation and usage instructions to this repo by way 
+of a pull request.)
+
+- Clone/Fork this repo or grab an archive and unzip it
+- Install [Composer](https://getcomposer.org/)
+- Install the PHP XSL extension e.g. For Debian based Linux
+```bash
+sudo apt install php-xsl
+```
+PHP normally has the XML extension built-in, but you may need to install it manually.
+```bash
+sudo apt install php-xml
+```
+- run `composer install`
+
+### Building
+```bash
+make build
+```
+Will build a new PHAR executable in the bin directory. You will need [Box](https://github.com/humbug/box) installed
+and your `php.ini` settings modified to build phar files (off by default).
+
+### Changing the library
+
+1.  fork it
+2.  write the test
+3.  amend it
+4.  do a pull request
+
+Found a bug you can't figure out?
+
+1.  fork it
+2.  write the test
+3.  do a pull request
+
+NB. Make sure you rebase to HEAD before your pull request
+
+Or log an issue ticket in Github.
+
+## Where?
+
+The library is hosted at [Github](https://github.com/chippyash/db-plantuml). It is
+available at [Packagist.org](https://packagist.org/packages/chippyash/db-plantuml)
 
 ## License
 This software is licensed under the [BSD-3 Clause license](LICENSE.md).
 
-## To Do
- - complete the DDL generation tool
+## History
+V0.0.0 Initial alpha release
+
+V0.0.1 Alpha release with DDL generator

@@ -12,4 +12,9 @@ class PumlView
 {
     use Operating;
     use NameConstructing;
+
+    protected function parseOperation(string $content)
+    {
+        return str_replace("\n", ' ', $content);
+    }
 }

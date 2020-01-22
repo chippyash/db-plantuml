@@ -98,7 +98,7 @@
                         <UML:Stereotype name="View"/>
                     </UML:ModelElement.stereotype>
                     <UML:Classifier.feature>
-                        <UML:Operation name="select(user_id, data\nfrom user, session\njoin id on user_id)" xmi.id="att61"/>
+                        <UML:Operation name="select(user_id, data from user\njoin session on\n(user.id = session.user_id))" xmi.id="att61"/>
                     </UML:Classifier.feature>
                 </UML:Class>
                 <UML:Class name="UserUpdate" namespace="model1" xmi.id="cl0024">
@@ -115,7 +115,7 @@
                         <UML:Stereotype name="Proc"/>
                     </UML:ModelElement.stereotype>
                     <UML:Classifier.feature>
-                        <UML:Operation name="addUser(uid, guid)" xmi.id="att64"/>
+                        <UML:Operation name="addUser(IN uid INT, IN guid INT)" xmi.id="att64"/>
                     </UML:Classifier.feature>
                 </UML:Class>
                 <UML:Association name="will have" namespace="model1" xmi.id="ass65">

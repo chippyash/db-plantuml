@@ -24,7 +24,7 @@ class PumlProcs
     }
 
     /**
-     * @return array
+     * @return PumlProc[]
      */
     public function getProcs(): array
     {

@@ -15,7 +15,7 @@ include dirname(__DIR__) . '/vendor/autoload.php';
 
 $app = new Application(
     'pmldbconv',
-    file_get_contents(dirname(__DIR__) . '/VERSION')
+    file_get_contents(dirname(__FILE__, 2) . '/VERSION')
 );
 $app->add(new GenerateCommand());
 $app->run();

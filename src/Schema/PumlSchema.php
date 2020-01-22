@@ -66,9 +66,9 @@ class PumlSchema
     }
 
     /**
-     * @return PumlProcs
+     * @return PumlViews
      */
-    public function getViews(): PumlProcs
+    public function getViews(): PumlViews
     {
         return $this->views;
     }
