@@ -276,6 +276,8 @@ If this is not the case, you can specify the folder location with the `-p` flag 
 `bin/pumdbconv g -p /usr/local/javajars ./examples/User-Physical.puml ./out.sql`
 
 ### Installation - production use
+You will need PHP7.2+ with the xsl and xml extensions installed to use this program.
+
 - Clone/Fork this repo or grab an archive and unzip it
 - Move the bin/pumldbconv file into a directory in your path, perhaps `/usr/local/bin`
 - Check that you can execute it with `pumlodbconv -v` 
