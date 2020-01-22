@@ -22,11 +22,11 @@ depend:
 
 # Building
 build:
+	${BIN}
 	${BOX} compile
 	chmod a+x bin/pumldbconv
 
 push:
-	${BIN}
 	${GIT} add --all
 	${GIT} commit -m"Build"
 	${GIT} tag $$(cat VERSION)
