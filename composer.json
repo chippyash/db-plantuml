@@ -3,7 +3,7 @@
     "description": "Support for creating DB logical and physical diagrams using the awesome PlantUml",
     "keywords": ["plantuml", "database", "diagrams"],
     "type": "project",
-    "license": "BSD-2",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Ashley Kitson",
