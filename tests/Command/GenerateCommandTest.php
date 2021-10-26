@@ -26,6 +26,14 @@ class GenerateCommandTest extends TestCase
      * @var vfsStreamDirectory
      */
     protected $fileSystem;
+    /**
+     * @var string
+     */
+    protected $sourceFile;
+    /**
+     * @var string
+     */
+    protected $outFile;
 
     public function testYouMustProvideAnInputFileArgument()
     {
@@ -49,7 +57,7 @@ class GenerateCommandTest extends TestCase
         $this->expectExceptionMessage('foo.puml does not exist');
         $this->sut->execute([
             'input' => 'foo.puml',
-            'output' => $this->fileSystem->url() .'/out.sql'
+            'output' => $this->outFile
         ]);
     }
 
@@ -59,16 +67,16 @@ class GenerateCommandTest extends TestCase
         $this->expectExceptionMessage('vfs://root/out.sql is not writeable');
         $this->fileSystem->chmod(0400);
         $this->sut->execute([
-            'input' => dirname(__DIR__) . '/fixtures/User-Logical.xmi',
-            'output' => $this->fileSystem->url() .'/out.sql'
+            'input' => $this->sourceFile,
+            'output' => $this->outFile
         ]);
     }
     
     public function testTheCommandAcceptsADebugOption()
     {
         $this->sut->execute([
-            'input' => dirname(__DIR__) . '/fixtures/User-Logical.xmi',
-            'output' => $this->fileSystem->url() .'/out.sql',
+            'input' => $this->sourceFile,
+            'output' => $this->outFile,
             '--debug' => 1
         ]);
         $this->assertFileExists($this->fileSystem->url() .'/pumldbconv.log');
@@ -77,8 +85,8 @@ class GenerateCommandTest extends TestCase
     public function testDebugOptionWillWriteDebugFile()
     {
         $this->sut->execute([
-            'input' => dirname(__DIR__) . '/fixtures/User-Logical.xmi',
-            'output' => $this->fileSystem->url() .'/out.sql',
+            'input' => $this->sourceFile,
+            'output' => $this->outFile,
             '--debug' => 1
         ]);
 
@@ -88,8 +96,8 @@ class GenerateCommandTest extends TestCase
     public function testByDefaultDebugFileIsNotWritten()
     {
         $this->sut->execute([
-            'input' => dirname(__DIR__) . '/fixtures/User-Physical.xmi',
-            'output' => $this->fileSystem->url() .'/out.sql'
+            'input' => $this->sourceFile,
+            'output' => $this->outFile
         ]);
 
         $this->assertFileNotExists($this->fileSystem->url() .'/pumldbconv.log');
@@ -98,13 +106,12 @@ class GenerateCommandTest extends TestCase
     public function testCommandCanTranslateInputFile()
     {
         $this->sut->execute([
-            'input' => dirname(__DIR__) . '/fixtures/User-Physical.xmi',
-            'output' => $this->fileSystem->url() .'/out.sql',
-            '--debug' => 1
+            'input' => $this->sourceFile,
+            'output' => $this->outFile
         ]);
 
-        $debug = file($this->fileSystem->url() .'/pumldbconv.log', FILE_IGNORE_NEW_LINES);
-
+        $sql = file_get_contents($this->outFile);
+        $this->assertStringContainsString("CREATE TABLE `user`", $sql);
     }
 
     protected function setUp(): void
@@ -114,5 +121,8 @@ class GenerateCommandTest extends TestCase
         $this->sut = new CommandTester($app->find('generate'));
         $this->fileSystem = vfsStream::setup();
         $this->fileSystem->chmod(0700);
+        $this->sourceFile = $this->fileSystem->url() . '/User-Physical.xmi';
+        copy(dirname(__DIR__) . '/fixtures/User-Physical.xmi', $this->sourceFile);
+        $this->outFile = $this->fileSystem->url() .'/out.sql';
     }
 }

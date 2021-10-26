@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><XMI xmlns:UML="href://org.omg/UML/1.3" xmi.version="1.1">
+    <XMI.header>
+        <XMI.metamodel xmi.name="UML" xmi.version="1.3"/>
+    </XMI.header>
+    <XMI.content>
+        <UML:Model name="PlantUML" xmi.id="model1">
+            <UML:Namespace.ownedElement>
+                <UML:Class name="user" namespace="model1" xmi.id="cl0002">
+                    <UML:ModelElement.stereotype/>
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="&lt;b&gt;PK id&lt;/b&gt; ::int" xmi.id="att14"/>
+                        <UML:Attribute name="&lt;color:blue&gt;IDX tag&lt;/color&gt; ::string" xmi.id="att15"/>
+                        <UML:Attribute name="&lt;color:blue&gt;UNX username&lt;/color&gt; ::string" xmi.id="att16"/>
+                        <UML:Attribute name="bar :string not empty" xmi.id="att17"/>
+                        <UML:Attribute name="password :string not empty" xmi.id="att18"/>
+                        <UML:Attribute name="&lt;i&gt;index[bar, password]&lt;/i&gt;" xmi.id="att19"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="session" namespace="model1" xmi.id="cl0006">
+                    <UML:ModelElement.stereotype/>
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="&lt;b&gt;PK id&lt;/b&gt; ::int" xmi.id="att20"/>
+                        <UML:Attribute name="data text not empty" xmi.id="att21"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="profile" namespace="model1" xmi.id="cl0008">
+                    <UML:ModelElement.stereotype/>
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="age :int" xmi.id="att22"/>
+                        <UML:Attribute name="birthday :datetime not empty" xmi.id="att23"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="group" namespace="model1" xmi.id="cl0010">
+                    <UML:ModelElement.stereotype/>
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="&lt;b&gt;PK id&lt;/b&gt; ::int" xmi.id="att24"/>
+                        <UML:Attribute name="name :string not empty" xmi.id="att25"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Gender" namespace="model1" xmi.id="cl0012">
+                    <UML:ModelElement.stereotype/>
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="MALE" xmi.id="att26"/>
+                        <UML:Attribute name="FEMALE" xmi.id="att27"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Association namespace="model1" xmi.id="ass28">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd association="ass28" type="cl0002" xmi.id="end29">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass28" type="cl0004" xmi.id="end30">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association name="can have" namespace="model1" xmi.id="ass31">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd aggregation="aggregate" association="ass31" type="cl0002" xmi.id="end32">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass31" type="cl0006" xmi.id="end33">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association name="has a" namespace="model1" xmi.id="ass34">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd aggregation="composite" association="ass34" type="cl0002" xmi.id="end35">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass34" type="cl0008" xmi.id="end36">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association name="can be in &gt;" namespace="model1" xmi.id="ass37">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd aggregation="aggregate" association="ass37" type="cl0002" xmi.id="end38">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd aggregation="aggregate" association="ass37" type="cl0010" xmi.id="end39">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+                <UML:Association name="gender" namespace="model1" xmi.id="ass40">
+                    <UML:Association.connection>
+                        <UML:AssociationEnd association="ass40" type="cl0008" xmi.id="end41">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                        <UML:AssociationEnd association="ass40" type="cl0012" xmi.id="end42">
+                            <UML:AssociationEnd.participant/>
+                        </UML:AssociationEnd>
+                    </UML:Association.connection>
+                </UML:Association>
+            </UML:Namespace.ownedElement>
+        </UML:Model>
+    </XMI.content>
+</XMI>

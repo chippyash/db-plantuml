@@ -10,7 +10,7 @@
 Components
 '/
 'Physical diagrams deal with Tables, so mark class a T
-!unquoted function Table(alias, name="", description="")
+!unquoted procedure Table(alias, name="", description="")
 	!if (%strlen(name) == 0)
 		!name = alias
 	!endif
@@ -19,12 +19,12 @@ Components
     !else
     	class "name" as alias << (T,red)Table >>
 	!endif
-!endfunction
+!endprocedure
 'Psuedonym for Table
 !define Entity(alias, name="", description="") Table(alias, name, description)
 
 ' Type (Enum)
-!unquoted function Type(alias, name="", description="")
+!unquoted procedure Type(alias, name="", description="")
 	!if (%strlen(name) == 0)
     	!name = alias
     !endif
@@ -33,9 +33,9 @@ Components
 	!else
 		enum "name" as alias << (E, green)Enum>>
     !endif
-!endfunction
+!endprocedure
 'Set (Enum)
-!unquoted function Set(alias, name="", description="")
+!unquoted procedure Set(alias, name="", description="")
 	!if (%strlen(name) == 0)
     	!name = alias
     !endif
@@ -44,7 +44,7 @@ Components
 	!else
 		enum "name" as alias << (S, green)Set>>
     !endif
-!endfunction
+!endprocedure
 
 !define Trigger(alias, name) class "name" as alias << (G, Cyan)Trigger >> #cyan
 !define Proc(alias, name) class "name" as alias << (P, Cyan)Proc >> #cyan
@@ -71,26 +71,26 @@ Data Type modifiers
 Indexes
 '/
 'Primary key is bold. By default PKs are called 'id' and are autoincrement Integers
-!unquoted function primary($name = 'id', $type=int(), $auto=1)
+!unquoted procedure primary($name = 'id', $type=int(), $auto=1)
 	!if ($auto == 1)
 		!$autoincrement = 'AUTOINCREMENT'
 	!else
 		!$autoincrement = ''
 	!endif
 	$name $type PRIMARY KEY $autoincrement
-!endfunction
+!endprocedure
 
 'Non unique index
-!unquoted function idx($name, $type=int())
+!unquoted procedure idx($name, $type=int())
 	$name $type
 	index($name)
-!endfunction
+!endprocedure
 
 'Unique Index
-!unquoted function unique($name, $type=int())
+!unquoted procedure unique($name, $type=int())
 	$name $type
 	key($name)
-!endfunction
+!endprocedure
 
 'Generic index definitions
 !define idx2(name1, name2) index(name1, name2)
@@ -99,16 +99,16 @@ Indexes
 /'
 Foreign keys. By default FKs are <tablename>_id and are integers
 '/
-!unquoted function foreign_key($tableName, $to, $type=int(), $suffix='_id')
+!unquoted procedure foreign_key($tableName, $to, $type=int(), $suffix='_id')
 	!$fkname = $tableName + $suffix
 	$fkname $type
 	$to : fk($fkname, $tableName)
-!endfunction
+!endprocedure
 
 /'
 Table joins
 '/
-!unquoted function _join($from, $to, $verb, $fNum, $tNum)
+!unquoted procedure _join($from, $to, $verb, $fNum, $tNum)
 	!if ($fNum == 0)
 		!if ($tNum == 0)
 			$from |o--o| $to: $verb
@@ -165,51 +165,56 @@ Table joins
 			$from "$fNum" }|--|{ "$tNum" $to: $verb
 		!endif
 	!endif
-!endfunction
+!endprocedure
 
 'Zero, one or more to many
-!unquoted function zeromany(from, to, verb, tNum='n')
+!unquoted procedure zeromany(from, to, verb, tNum='n')
 	_join(from,to,verb,0,tNum)
 	to : foreign_key(from, to)
-!endfunction
+!endprocedure
+
+'One To One
+!unquoted procedure oneone(from, to, verb, keyname='id', type=int())
+	_join(from,to,verb,1,1)
+!endprocedure
 
 'One to Many
-!unquoted function onemany(from, to, verb, tNum='n')
+!unquoted procedure onemany(from, to, verb, tNum='n')
 	_join(from,to,verb,1,tNum)
 	to : foreign_key(from, to)
-!endfunction
+!endprocedure
 
 'Many to Many
-!unquoted function manymany($from, $to, $verbFrom, $verbTo)
+!unquoted procedure manymany($from, $to, $verbFrom, $verbTo)
 	!$tId = $from + $to
 	!$tNm = $from + '_' + $to
 	Table($tId, $tNm) {
 	}
 	onemany($from, $tId, $verbFrom)
 	onemany($to, $tId, $verbTo)
-!endfunction
+!endprocedure
 
 'One To One
-!unquoted function oneone(from, to, verb, keyname='id', type=int())
+!unquoted procedure procedure(from, to, verb, keyname='id', type=int())
 	_join(from,to,verb,1,1)
 	to : primary(keyname, type, 0)
-!endfunction
+!endprocedure
 
 'Type Dependency
-!unquoted function depends($from, $to, $colName)
+!unquoted procedure depends($from, $to, $colName)
 	$from : $to $colName NOT NULL
 	$from::$colName --> $to : $colName
-!endfunction
+!endprocedure
 
 'table action trigger
-!unquoted function triggers($from, $to)
+!unquoted procedure triggers($from, $to)
 	$from .> $to
-!endfunction
+!endprocedure
 
 'proc uses table
-!unquoted function uses($from, $to)
+!unquoted procedure uses($from, $to)
 	$from ..> $to
-!endfunction
+!endprocedure
 
 hide stereotypes
 hide empty members

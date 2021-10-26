@@ -1,12 +1,12 @@
 @startuml
 title User Logical Design
 !include ../dist/DatabaseLogical.iuml
-footer Created by chippyash/db-plantuml
+footer Created by chippyash/db-plantuml - PlantUML V1.2021.12 - Graphviz version 2.43.0
 
 Table(user, user, User in our system) {
 	primary()
 	idx(tag, string(30))
-	unique('username', string(30))
+	unique(username, string(30))
 	not_null(bar, text())
 	not_null(password, string(30))
 	idx2(username, password)

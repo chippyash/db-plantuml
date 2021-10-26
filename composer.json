@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^8.0",
         "ext-dom": "*",
         "ext-xsl": "*",
         "symfony/console": "^5.0"
@@ -24,5 +24,11 @@
         "psr-4": {
             "Chippyash\\": "src/"
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit tests"
+    },
+    "scripts-descriptions": {
+        "test": "Run unit tests for plantuml-2-SQL binary"
     }
 }

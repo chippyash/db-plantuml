@@ -1,6 +1,7 @@
 @startuml
 title User Physical Design
 !include ../dist/DatabasePhysical.iuml
+footer Created by chippyash/db-plantuml - PlantUML V1.2021.12 - Graphviz version 2.43.0
 
 Table(user, user, User in our system) {
 	primary()

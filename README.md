@@ -10,6 +10,8 @@ your database.
 
 ## PlantUml Support
 
+- Tested with PlantUML V1.2021.12 - Graphviz version 2.43.0
+
 2 definition files
  - DatabaseLogical.iuml
  - DatabasePhysical.iuml
@@ -17,7 +19,7 @@ your database.
 ### Goal
 To quickly create logical db designs that end users might understand
 and convert them to initial physical designs with additional functionality
-so they can quickly turned into something developers will understand.
+that can be turned into something developers will understand, i.e. a SQL Schema
 
 ### Demo
 
@@ -172,6 +174,8 @@ A PHP utility CLI program that will convert your physical diagram to SQL DDL.
 
 MySql is supported at this release.
 
+- Installation - "See Installation - production use" below
+
 ### Basic usage
 `bin/pumldbconv g ./examples/User-Physical.puml ./out.sql`
 
@@ -273,14 +277,14 @@ The program assumes that your plantuml.jar is located at:
 - "C:/Program Files/Java/jars/plantuml.jar" for Windows
 
 If this is not the case, you can specify the folder location with the `-p` flag e.g.:
-`bin/pumdbconv g -p /usr/local/javajars ./examples/User-Physical.puml ./out.sql`
+`bin/pumldbconv g -p /usr/local/javajars ./examples/User-Physical.puml ./out.sql`
 
 ### Installation - production use
-You will need PHP7.2+ with the xsl and xml extensions installed to use this program.
+You will need PHP8.0+ with the xsl and xml extensions installed to use this program.
 
 - Clone/Fork this repo or grab an archive and unzip it
 - Move the bin/pumldbconv file into a directory in your path, perhaps `/usr/local/bin`
-- Check that you can execute it with `pumlodbconv -v` 
+- Check that you can execute it with `pumldbconv -V`
 - Remove the source files if no longer required
 
 ### Installation - development
@@ -336,3 +340,5 @@ This software is licensed under the [BSD-3 Clause license](LICENSE.md).
 V0.0.0 Initial alpha release
 
 V0.0.1 Alpha release with DDL generator
+
+V1.0.0 Upgrade to use PHP 8 and latest version of PlantUML

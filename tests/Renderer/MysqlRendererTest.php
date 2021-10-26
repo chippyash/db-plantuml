@@ -12,6 +12,8 @@ namespace Test\Chippyash\Renderer;
 use Chippyash\Renderer\MysqlRenderer;
 use Chippyash\Schema\PumlSchema;
 use PHPUnit\Framework\TestCase;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
 
 class MysqlRendererTest extends TestCase
 {
@@ -27,7 +29,7 @@ class MysqlRendererTest extends TestCase
     public function testTablesAreRendered()
     {
         $output = $this->sut->renderDdl($this->schema);
-        print_r($output);
+        $this->assertStringContainsString("CREATE TABLE `user`", $output);
     }
 
     protected function setUp(): void

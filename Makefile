@@ -25,7 +25,7 @@ build:
 	${BOX} compile
 	chmod a+x bin/pumldbconv
 
-version:
+version: depend
 	${BIN}
 
 push:
