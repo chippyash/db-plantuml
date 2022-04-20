@@ -33,17 +33,17 @@ Look at both files. The only difference between them is
     - Trigger & trigger()
     - (Stored) Proc and uses()
 
-The original logical definition was copy-pasta'd from the logical file
+The original logical definition was copy-pasted from the logical file
 to the physical file and renders automatically in physical form.
 
 Take a look at the `dist\*.iuml` files. It's the subtle differences between the
-function declations that allows the transform to happen.
+function declarations that allows the transform to happen.
 
 ### Installation
 There is no real need to install this code base. You can access the
 required files remotely using the `!includeurl` directive.
 
-_You do however, need to install [PlantUml](http://plantuml.com/)_!
+_However, you do need to install [PlantUml](http://plantuml.com/)_!
 
 ### Usage
 1. Create your logical model to represent customer/user view
@@ -65,7 +65,7 @@ in a Physical model
 ```
 Table(alias, name="", description="")  //preferred
 or 
-Entity(alias, name="", description="") //psuedonym for Table
+Entity(alias, name="", description="") //pseudonym for Table
 
 Type(alias, name="", description="")   //data type (enum)
 
@@ -151,7 +151,9 @@ Proc(p1, StoredProcs) {
 View(alias, name)
 e.g.
 View(v1, sessions) {
-    select(user_id, data\nfrom user, session\njoin id on user_id)
+    select(user_id, data
+    from user, session
+    join id on user_id)
 }
 ```
 ##### Indexes and keys
@@ -166,13 +168,13 @@ in your model. You may need to explicitly declare them for Tables that are off m
 function triggers(from, to)  //table actions trigger
 function uses(from, to)      //proc uses table
 ```
-These `uses` relationships is purely informational.
+These `uses` relationships are purely informational.
 
 ## Diagram to SQL conversion
 
 A PHP utility CLI program that will convert your physical diagram to SQL DDL.
 
-MySql is supported at this release.
+MySQL is supported in this release.
 
 - Installation - "See Installation - production use" below
 
@@ -282,7 +284,7 @@ If this is not the case, you can specify the folder location with the `-p` flag 
 ### Installation - production use
 You will need PHP8.0+ with the xsl and xml extensions installed to use this program.
 
-- Clone/Fork this repo or grab an archive and unzip it
+- Clone/fork this repo or grab an archive and unzip it
 - Move the bin/pumldbconv file into a directory in your path, perhaps `/usr/local/bin`
 - Check that you can execute it with `pumldbconv -V`
 - Remove the source files if no longer required
@@ -294,7 +296,7 @@ of a pull request.)
 
 - Clone/Fork this repo or grab an archive and unzip it
 - Install [Composer](https://getcomposer.org/)
-- Install the PHP XSL extension e.g. For Debian based Linux
+- Install the PHP XSL extension e.g. for Debian based Linux:
 ```bash
 sudo apt install php-xsl
 ```
