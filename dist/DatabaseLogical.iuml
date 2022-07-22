@@ -50,6 +50,7 @@ Components
 Data Types
 '/
 !define string(l=30) string
+!define char(l=8) char
 !define text() text
 !define date() date
 !define time() time
@@ -62,12 +63,13 @@ Data Types
 Data Type modifiers
 '/
 !define not_null(name, type) name type not empty
-
+!define unsigned(name, l=8) name unsigned int
+!define _unsigned(l=8) unsigned int
 /'
 Indexes
 '/
 'Primary key is bold. By default PKs are called 'id' and are autoincrement Integers
-!unquoted procedure primary($name = 'id', $type=int(), $auto=1)
+!unquoted procedure primary($name = 'id', $type=_unsigned(), $auto=1)
 	!$autoincrement = ''
 	<b>PK $name</b> :$type $autoincrement
 !endprocedure

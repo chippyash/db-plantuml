@@ -9,6 +9,8 @@ Table(user, user, User in our system) {
 	unique(username, string(30))
 	not_null(bar, text())
 	not_null(password, string(30))
+	not_null(guid, char(36))
+	unsigned(count)
 	idx2(username, password)
 }
 note right of user

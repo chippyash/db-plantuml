@@ -74,6 +74,7 @@ Set(alias, name="", description="")    //data type (set)
 ##### Data types
 ```
 string(l=30)
+char(l=12)
 text()
 date()
 time()
@@ -93,7 +94,8 @@ Table(t1, foo) {
 ```
 ##### Type modifiers
 ```
-not_null(x, t)
+not_null(name, type)
+unsigned(name, l=8)  //unsigned integer
 ```
 ##### Indexes and keys
 ```
@@ -342,3 +344,5 @@ V0.0.0 Initial alpha release
 V0.0.1 Alpha release with DDL generator
 
 V1.0.0 Upgrade to use PHP 8 and latest version of PlantUML
+
+V1.1.0 Add UNSIGNED attribute support

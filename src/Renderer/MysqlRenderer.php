@@ -40,6 +40,9 @@ class MysqlRenderer extends AbstractRenderer
                 $out .= $column->getLength() > 0
                     ? "{$colType}({$column->getLength()})"
                     : $colType;
+                $out .= $column->isUnsigned()
+                    ? ' UNSIGNED'
+                    : '';
                 $out .= $column->isPrimary()
                     ? ' PRIMARY KEY'
                     : '';

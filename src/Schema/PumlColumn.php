@@ -36,6 +36,10 @@ class PumlColumn
      * @var bool
      */
     protected $isAutoincrementing = false;
+    /**
+     * @var bool
+     */
+    protected $isUnsigned = false;
 
     /**
      * PumlColumn constructor.
@@ -91,6 +95,16 @@ class PumlColumn
     }
 
     /**
+     * @param bool $isUnsigned
+     * @return PumlColumn
+     */
+    public function setIsUnsigned(bool $isUnsigned): PumlColumn
+    {
+        $this->isUnsigned = $isUnsigned;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -136,5 +150,13 @@ class PumlColumn
     public function isAutoincrementing(): bool
     {
         return $this->isAutoincrementing;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUnsigned(): bool
+    {
+        return $this->isUnsigned;
     }
 }

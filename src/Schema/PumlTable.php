@@ -27,6 +27,9 @@ class PumlTable
         if (strpos($content, 'NOT NULL') > 0) {
             $column->setIsNull(false);
         }
+        if (strpos($content, 'UNSIGNED') > 0) {
+            $column->setIsUnsigned(true);
+        }
 
         return $column;
     }
