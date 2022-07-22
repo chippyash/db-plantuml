@@ -149,13 +149,14 @@ class MysqlRenderer extends AbstractRenderer
     protected function renderTriggers(PumlSchema $schema): string
     {
         $out = '';
-        if (count($schema->getTriggers()->getTriggers()) == 0) {
+        $triggers = $schema->getTriggers()->getTriggers();
+        if (count($triggers) == 0) {
             return $out;
         }
         $pad = str_pad('', 4);
 
         /** @var PumlTrigger $proc */
-        foreach($schema->getTriggers()->getTriggers() as $proc) {
+        foreach($triggers as $proc) {
             $tableName = '<table_name>';
             //see if there is a relationship between trigger and a table
             $relationships = $schema->getRelationships()

@@ -28,6 +28,9 @@ class PumlTriggers
      */
     public function getTriggers(): array
     {
+        if ($this->triggers == null) {
+            return [];
+        }
         return $this->triggers;
     }
 }
