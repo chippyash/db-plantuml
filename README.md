@@ -171,6 +171,28 @@ function uses(from, to)      //proc uses table
 ```
 These `uses` relationships is purely informational.
 
+##### User defined data types
+Whilst many SQL RDMS natively support user defined data types, many do not, including the
+ever popular MySql/MariaDb.  You can achieve this functionality in PlantUml yourself.
+
+```
+!define guid() char(36)
+
+!unquoted procedure orgId()
+    orgId int(8) UNSIGNED NOT NULL
+    index(orgId)
+!endprocedure
+```
+and then use them in your Table definitions:
+
+```
+Table(invpayee, cr_invoice_payee, Invoice Payee) {
+    primary(entityId, guid(), 0)
+    orgId()
+}
+```
+See (PlantUml Preprocessing)[https://plantuml.com/preprocessing] for more ideas.
+
 ## Diagram to SQL conversion
 
 A PHP utility CLI program that will convert your physical diagram to SQL DDL.
