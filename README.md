@@ -95,7 +95,8 @@ Table(t1, foo) {
 ##### Type modifiers
 ```
 not_null(name, type)
-unsigned(name, l=8)  //unsigned integer
+unsigned(name, l=8)  //unsigned integer with a name
+_unsigned(l=8)       //unsigned integer, use with primary() etc
 ```
 ##### Indexes and keys
 ```
