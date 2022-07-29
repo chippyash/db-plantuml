@@ -100,8 +100,8 @@ _unsigned(l=8)       //unsigned integer, use with primary() etc
 ```
 ##### Indexes and keys
 ```
-primary(name = 'id', type=int(), auto=1)  //primary key
-idx(name, type=int())    //non unique index - one member
+primary(name = 'id', type=_unsigned(8), auto=1)  //primary key
+idx(name, type=int())      //non unique index - one member
 idx2(name1, name2)         //non unique index - two members
 idx3(name1, name2, name3)  //non unique index - three members
 ```
